@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Playwrite NZ Basic", cursive;
+}
+
+.container-app-name {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.streak {
+    padding-top: 8px;
+}
+
+.head {
+    justify-content: center;
+    display: flex;
+}
+.image {
+    justify-items: center;
+    display: flex;
+    width: 400px;
+    height: auto;
+}
+
+.streak-container {
+    margin: 20px;
+}
+
+.streak-container, ul {
+    list-style-type: none;
+}
+
+.container-habit {
+    padding: 20px;
+}
+
+.add-container {
+    margin: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-container {
+
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.action {
+    margin: 5px;
+}
+
+.heatmap-container {
+    background-color: aqua;
+    width: 90%;
+    height: 100px;
+    margin: 20px;
+}
+
+.statistik-container {
+    background-color: aquamarine;
+    width: 90%;
+    height: 100px;
+    margin: 20px;
+}
+
+button {
+    padding: 4px 14px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}

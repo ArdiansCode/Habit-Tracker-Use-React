@@ -78,6 +78,11 @@ button {
     padding: 4px 14px;
 }
 
+input {
+    width: 100px;
+    height: 40px;
+}
+
 footer {
     display: flex;
     justify-content: center;

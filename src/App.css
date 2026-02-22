@@ -36,9 +36,12 @@
 }
 
 .container-habit {
-    padding: 20px;
+    margin: 20px;
 }
 
+.container-heatmap {
+    margin: 20px;
+}
 .add-container {
     margin: 6px;
     display: flex;
@@ -49,6 +52,9 @@
 
 }
 
+.analis {
+    background-color: #30a14e;
+}
 li {
     display: flex;
     justify-content: space-between;
@@ -60,18 +66,21 @@ li {
     margin: 5px;
 }
 
-.heatmap-container {
+.heatmap-container {       /* Lebar sesuai layar */
+    overflow-x: auto;   /* Munculkan scrollbar hanya jika konten melebihi lebar */
+    white-space: nowrap; /* Mencegah teks/elemen turun ke baris baru */
+    border: 1px solid #ccc;
     background-color: aqua;
-    width: 90%;
-    height: 100px;
-    margin: 20px;
 }
 
 .statistik-container {
     background-color: aquamarine;
-    width: 90%;
-    height: 100px;
-    margin: 20px;
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    background-color: aqua;
 }
 
 button {
@@ -82,6 +91,27 @@ input {
     width: 100px;
     height: 40px;
 }
+
+.day {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.container-analis {
+    margin: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+}
+
+/* Skala warna GitHub */
+.level-0 { background-color: #ebedf0; } /* Tidak ada */
+.level-1 { background-color: #9be9a8; } /* Sedikit */
+.level-2 { background-color: #40c463; } /* Sedang */
+.level-3 { background-color: #30a14e; } /* Banyak */
+.level-4 { background-color: #216e39; } /* Sangat banyak */
+
 
 footer {
     display: flex;

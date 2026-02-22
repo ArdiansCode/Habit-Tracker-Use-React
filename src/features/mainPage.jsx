@@ -2,22 +2,33 @@ import { useState } from 'react'
 import useHabits from './habits/hooks/useHabits'
 import cartoon from '../assets/yoyo.png'
 import '../App.css'
+import MyCalendarHeatmap from './heatmap/heatmap'
+import Statistik from './statistik/statistik'
+import { Sparklines, SparklinesBars, SparklinesLine } from 'react-sparklines';
 
 function App() {
     const {
         addHabit,
         deleteHabit,
-        editHabit,
         isDoneHabit,
         searchHabits,
         filteredHabits,
         filter,
         setFilter,
-        setSearch
+        setSearch,
+        setHabits,
+        habits,
+        clearAll
     } = useHabits();
+
+    const {
+        completedCount,
+        totalHabits
+    } = Statistik()
 
     const [habit, setHabit] = useState("");
     const [done, setDone] = useState(false);
+    const [edit,setEdit] = useState(null)
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -25,6 +36,20 @@ function App() {
         setHabit("")
         setDone(false)
     }
+
+    function editHabit(id) {
+        const habitEdit = habits.find(h => h.id === id);
+
+        if (habitEdit) {
+            setHabit(habitEdit.habit);
+            setDone(habitEdit.isDone);
+            setEdit(id);
+            
+            deleteHabit(id)
+        }
+    }
+
+    const sampleData = [3,3,5,5,3,2,2,2,2,2,2,2,25,7,2,4,2,8,5,9,1,0,25,2,7,3,6,4,2,4,4,3,3,4,45,4,6,7,6,3,5,7,5,4,3,3,]
     return (
         <>
         <div className='container-app-name'>
@@ -40,12 +65,16 @@ function App() {
 
         <section>
             <div className='streak-container'>
-                <h2>Streak Habit</h2>
+                <h2>Streak Habit🔥</h2>
                 <ul>
-                    <li>yyyy🔥</li>
-                    <li>yyyy🔥</li>
-                    <li>yyyy🔥</li>
-                    <li>yyyy🔥</li>
+                    {filteredHabits.toSorted((a, b) => a.habit.localeCompare(b.habit)).map(h => (
+                    <li
+                        key={h.id}
+                        style={{ color: h.isDone == true ? "green" : "gray" }}
+                    >
+                        <p>{h.habit} </p> <div>🔥</div>
+                    </li>
+                    ))}
                 </ul>
             </div>
         </section>
@@ -60,18 +89,12 @@ function App() {
                         type="text"
                         value={habit}
                         onChange={e => setHabit(e.target.value)} />
-                        <input
-                        className="checkbox"
-                        type="checkbox"
-                        value={done}
-                        onChange={e => setDone(e.target.checked)}
-                        />
                         <button>Tambah Habit</button>
                         </form>
                     </div>
                 </div>
                 <div className='clear'>
-                    <button>Hapus Semua</button>
+                    <button onClick={() => clearAll()}>Hapus Semua</button>
                 </div>
                 <button onClick={() => setFilter('all')}>All</button>
                 <button onClick={() => setFilter('active')}>Active</button>
@@ -79,28 +102,51 @@ function App() {
             </div>
             <div className='list-container'>
                 <ul>
-                    {filteredHabits.map(h => (
+                    {filteredHabits.toSorted((a, b) => a.habit.localeCompare(b.habit)).map(h => (
                     <li
                         key={h.id}
                         style={{ color: h.isDone == true ? "green" : "gray" }}
-                    >
+                    ><p>
                         {h.habit}
+                    </p>
+                    <div>
+                        <button onClick={() => editHabit(h.id)}>edit</button>
                         <button onClick={() => deleteHabit(h.id)}>❌</button>
                         <button onClick={() => isDoneHabit(h.id)}>✅</button>
+                    </div>
                     </li>
                     ))}
                 </ul>
             </div>  
         </section>
 
-        <section>
+        <section className='container-heatmap'>
+            <h2>{completedCount} Habit Selesai di satu tahun terkhir {totalHabits}</h2>
+            <div>
+                <span>less</span>
+                <div className="day level-0"></div>
+                <div className="day level-1"></div>
+                <div className="day level-2"></div>
+                <div className="day level-3"></div>
+                <div className="day level-4"></div>
+                <span>more</span>
+            </div>
             <div className='heatmap-container'>
-                <div className='heatmap'></div>
+                <MyCalendarHeatmap />
             </div>
         </section>
 
-        <section>
-            <div className='statistik-container'></div>
+        <section className='container-analis'>
+            <h2>analisis</h2>
+            <div className='statistik-container'>
+                
+                
+                    <Sparklines data={sampleData}>
+                        <SparklinesBars style={{ stroke: "white", fill: "#41c3f9", fillOpacity: ".25" }} />
+                        <SparklinesLine style={{ stroke: "#41c3f9", fill: "none" }} />
+                    </Sparklines>
+                
+            </div>
         </section>
         </>
     )

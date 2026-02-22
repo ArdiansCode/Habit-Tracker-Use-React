@@ -17,10 +17,6 @@ function useHabits() {
         localStorage.removeItem(setHabits(prev => prev.filter(h => h.id !== id )));
     }
 
-    function editHabit(id) {
-        console.assert("yyyyy")
-    }
-
     function isDoneHabit(id) {
         localStorage.setItem(setHabits(prev => prev.map(h => h.id === id ? {...h, isDone: !h.isDone} : h)))
     }
@@ -37,16 +33,23 @@ function useHabits() {
         return true;
     });
 
+    function clearAll() {
+        localStorage.removeItem("Habit");
+        location.reload();
+    }
+
     return {
         addHabit,
         deleteHabit,
-        editHabit,
         isDoneHabit,
         searchHabits,
         filteredHabits,
         filter,
         setFilter,
-        setSearch
+        setSearch,
+        setHabits,
+        habits,
+        clearAll
     }
 }
 

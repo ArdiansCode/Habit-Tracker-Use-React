@@ -1,13 +1,13 @@
 import {useState, useEffect} from "react";
 
-function useStorage(key, initialHabit) {
+function useStorage(key, initialValue) {
     const [value, setValue] = useState(() => {
         try {
             const storad = localStorage.getItem(key);
-            return storad !== null ? JSON.parse(storad) : initialHabit;
+            return storad !== null ? JSON.parse(storad) : initialValue;
         } catch (error) {
             console.error("gagal memuat localstorage", error);
-            return initialTask;
+            return initialValue;
         }
     });
 

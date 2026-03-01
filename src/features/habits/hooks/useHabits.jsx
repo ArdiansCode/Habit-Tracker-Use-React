@@ -34,7 +34,7 @@ function useHabits() {
 
     function clearAll() {
         localStorage.removeItem("Habit");
-        location.reload();
+        setHabits([]);
     }
 
 

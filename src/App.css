@@ -6,6 +6,15 @@
     font-family: "Playwrite NZ Basic", cursive;
 }
 
+body {
+  background-color: #ffffff; 
+  background-image: 
+    linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+
 .container-app-name {
     padding: 20px;
     display: flex;
@@ -164,7 +173,8 @@ input {
   justify-content: center;
   align-items: center;
   font-size: 1.5em;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
+  margin-top: -10px;
 }
 
 .streak-number {

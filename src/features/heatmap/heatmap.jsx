@@ -39,13 +39,13 @@ const MyCalendarHeatmap = () => {
           rectSize={14}
           space={3}
           panelColors={{
-          0: '#ebedf0',
+          0: '#EBEDF0',
           2: '#9be9a8',
           5: '#40c463',
           10: '#216e39',
         }}
           rectProps={{ rx: 2.5 }}
-          weekLabels={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
+          weekLabels={['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']}
         />
       </div>
       <div className='deskrip-heatmap'>

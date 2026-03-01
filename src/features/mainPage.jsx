@@ -120,12 +120,12 @@ function App() {
                     {filteredHabits.toSorted((a, b) => a.habit.localeCompare(b.habit)).map(h => (
                     <li
                         key={h.id}
-                        style={{ color: h.isDone == true ? "green" : "gray" }}
+                        style={{ color: h.isDone == true ? "black" : "gray" }}
                     ><p>
                         {h.habit}
                     </p>
                     <div>
-                        <button onClick={() => isDoneHabit(h.id)}><i class="fa-solid fa-check"></i></button>
+                        <button onClick={() => isDoneHabit(h.id)}>{h.isDone === false ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-xmark"></i>}</button>
                         <button onClick={() => editHabit(h.id)}><i class="fa-solid fa-pen-to-square"></i></button>
                         <button onClick={() => deleteHabit(h.id)}><i class="fa-solid fa-trash"></i></button>
                     </div>

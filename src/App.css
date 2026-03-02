@@ -46,10 +46,15 @@
     margin: 6px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+}
+
+.add {
+    width: 100%;
 }
 
 .list-container {
-
+    margin-top: 6px;
 }
 
 .analis {
@@ -66,30 +71,59 @@ li {
     margin: 5px;
 }
 
-.heatmap-container {       /* Lebar sesuai layar */
-    overflow-x: auto;   /* Munculkan scrollbar hanya jika konten melebihi lebar */
-    white-space: nowrap; /* Mencegah teks/elemen turun ke baris baru */
+.heatmap-container {  
+    margin-top: 8px;    
+    overflow-x: auto;
+    white-space: nowrap;
     border: 1px solid #ccc;
-    background-color: aqua;
+}
+
+.container {
+    margin: 20px;
+}
+
+.deskrip-heatmap {
+    display: flex;
+    margin: 8px;
 }
 
 .statistik-container {
-    background-color: aquamarine;
     width: 100%;
     height: auto;
     overflow-x: auto;
     white-space: nowrap;
     border: 1px solid #ccc;
-    background-color: aqua;
 }
 
 button {
+    padding: 8px 12px;
+    margin: 2px;
+}
+
+form {
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+}
+
+.search-and-clear {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-add {
+    width: 30%;
+    height: auto;
     padding: 4px 14px;
+    margin-left: -2px;
+    margin-right: 8px;
 }
 
 input {
-    width: 100px;
-    height: 40px;
+    width: 70%;
+    height: auto;
+    margin-top: 2px;
+    margin-left: -4px;
 }
 
 .day {
@@ -98,8 +132,15 @@ input {
   border-radius: 2px;
 }
 
+.des {
+    margin-top: 8px;
+    display: flex;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
 .container-analis {
-    margin: 20px;
+    margin-top: 8px;
     overflow-x: auto;
     white-space: nowrap;
     border: 1px solid #ccc;
@@ -111,6 +152,36 @@ input {
 .level-2 { background-color: #40c463; } /* Sedang */
 .level-3 { background-color: #30a14e; } /* Banyak */
 .level-4 { background-color: #216e39; } /* Sangat banyak */
+
+/* CSS */
+.streak {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fire-wrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em; /* Ukuran api */
+  padding-bottom: 4px;
+}
+
+.streak-number {
+  position: absolute;
+  z-index: 1;
+  font-size: 0.5em; /* Ukuran angka lebih kecil agar muat di tengah */
+  font-weight: bold;
+  color: white;
+  margin-top: 12px; /* Sesuaikan posisi vertikal agar pas di tengah api */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.fire-icon {
+  line-height: 1;
+}
 
 
 footer {

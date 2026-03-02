@@ -5,11 +5,10 @@ function useHabits() {
     const [habits, setHabits] = useStorage("Habit", []);
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState('all');
-
+    const [lastOpenDate, setLastOpenDate] = useStorage("LastOpenDate", "");
 
     function addHabit(habit, isDone) {
         if(!habit) return;
-
         setHabits(prev => [...prev, {id: Date.now(), habit, isDone}])
     }
 
@@ -37,6 +36,22 @@ function useHabits() {
         localStorage.removeItem("Habit");
         location.reload();
     }
+
+
+    const resetHabitsStatus = () => {
+        const resetData = habits.map(h => ({ ...h, isDone: false }));
+        setHabits(resetData);
+    };
+
+    useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+
+    if (lastOpenDate && lastOpenDate !== today) {
+        resetHabitsStatus();
+    }
+
+    setLastOpenDate(today);
+    }, [lastOpenDate, setLastOpenDate]);
 
     return {
         addHabit,

@@ -2,10 +2,10 @@ import useStorage from '../habits/hooks/useLocalStorage';
 import { useState, useMemo } from 'react';
 
 function Statistik() {
-    const [values] = useStorage('Habit', []);
+    const [values] = useStorage('DateTime', []);
 
     const completedCount = useMemo(() => {
-        return values.filter(h => h.isDone === true).length;
+        return (values || []).reduce((acc, curr) => acc + (curr.count || 0), 0);
     }, [values]);
 
     return {

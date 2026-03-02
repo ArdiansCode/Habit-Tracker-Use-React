@@ -4,19 +4,17 @@ import cartoon from '../assets/yoyo.png'
 import '../App.css'
 import MyCalendarHeatmap from './heatmap/heatmap'
 import Statistik from './statistik/statistik'
+import useStorage from './habits/hooks/useLocalStorage'
 import { Sparklines, SparklinesBars, SparklinesLine } from 'react-sparklines';
+import useStreak from './streak/streak'
 
 function App() {
     const {
         addHabit,
         deleteHabit,
         isDoneHabit,
-        searchHabits,
         filteredHabits,
-        filter,
         setFilter,
-        setSearch,
-        setHabits,
         habits,
         clearAll
     } = useHabits();
@@ -28,7 +26,8 @@ function App() {
 
     const [habit, setHabit] = useState("");
     const [done, setDone] = useState(false);
-    const [edit,setEdit] = useState(null)
+    const [edit,setEdit] = useState(null); 
+    const { tempStreak, totalStreak, dateTime } = useStreak();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -49,13 +48,20 @@ function App() {
         }
     }
 
-    const sampleData = [3,3,5,5,3,2,2,2,2,2,2,2,25,7,2,4,2,8,5,9,1,0,25,2,7,3,6,4,2,4,4,3,3,4,45,4,6,7,6,3,5,7,5,4,3,3,]
+    const sampleData = dateTime.map(time => (
+        [time.count]
+    ))
     return (
         <>
         <div className='container-app-name'>
             <h1 className='name-app'>Habits Tracker</h1>
             <div className='streak'>
-                <h2>streak🔥</h2>
+                <h2 className="streak">
+                <span className="fire-wrapper">
+                    <span className="streak-number">{tempStreak}</span>
+                    <span className="fire-icon">🔥</span>
+                </span>
+                </h2>
             </div>
         </div>
 
@@ -63,9 +69,15 @@ function App() {
             <img src={cartoon} className='image' alt="kartoon" />
         </section>
 
-        <section>
+        {/* <section>
             <div className='streak-container'>
-                <h2>Streak Habit🔥</h2>
+                <h2 className="streak">
+                Streak Habit 
+                <span className="fire-wrapper">
+                    <span className="streak-number">{totalStreak}</span>
+                    <span className="fire-icon">🔥</span>
+                </span>
+                </h2>
                 <ul>
                     {filteredHabits.toSorted((a, b) => a.habit.localeCompare(b.habit)).map(h => (
                     <li
@@ -77,7 +89,7 @@ function App() {
                     ))}
                 </ul>
             </div>
-        </section>
+        </section> */}
 
         <section className='container-habit'>
             <h2>Daftar Habits</h2>
@@ -89,16 +101,20 @@ function App() {
                         type="text"
                         value={habit}
                         onChange={e => setHabit(e.target.value)} />
-                        <button>Tambah Habit</button>
+                        <button className='button-add'>Tambah Habit</button>
                         </form>
                     </div>
                 </div>
-                <div className='clear'>
-                    <button onClick={() => clearAll()}>Hapus Semua</button>
+                <div className='search-and-clear'>
+                    <div>
+                        <button onClick={() => setFilter('all')}>Semua</button>
+                        <button onClick={() => setFilter('active')}>Aktif</button>
+                        <button onClick={() => setFilter('completed')}>Selesai</button>
+                    </div>
+                    <div className='clear'>
+                        <button onClick={() => clearAll()}>Hapus Semua</button>
+                    </div>
                 </div>
-                <button onClick={() => setFilter('all')}>All</button>
-                <button onClick={() => setFilter('active')}>Active</button>
-                <button onClick={() => setFilter('completed')}>Completed</button>
             </div>
             <div className='list-container'>
                 <ul>
@@ -110,9 +126,9 @@ function App() {
                         {h.habit}
                     </p>
                     <div>
-                        <button onClick={() => editHabit(h.id)}>edit</button>
-                        <button onClick={() => deleteHabit(h.id)}>❌</button>
-                        <button onClick={() => isDoneHabit(h.id)}>✅</button>
+                        <button onClick={() => isDoneHabit(h.id)}><i class="fa-solid fa-check"></i></button>
+                        <button onClick={() => editHabit(h.id)}><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onClick={() => deleteHabit(h.id)}><i class="fa-solid fa-trash"></i></button>
                     </div>
                     </li>
                     ))}
@@ -121,31 +137,21 @@ function App() {
         </section>
 
         <section className='container-heatmap'>
-            <h2>{completedCount} Habit Selesai di satu tahun terkhir {totalHabits}</h2>
-            <div>
-                <span>less</span>
-                <div className="day level-0"></div>
-                <div className="day level-1"></div>
-                <div className="day level-2"></div>
-                <div className="day level-3"></div>
-                <div className="day level-4"></div>
-                <span>more</span>
-            </div>
+            <h2>{completedCount} Habit Selesai di satu tahun</h2>
             <div className='heatmap-container'>
                 <MyCalendarHeatmap />
             </div>
         </section>
 
-        <section className='container-analis'>
-            <h2>analisis</h2>
-            <div className='statistik-container'>
-                
-                
+        <section className='container'>
+            <h2>Analisis</h2>
+            <div className='container-analis'>
+                <div className='statistik-container'>
                     <Sparklines data={sampleData}>
                         <SparklinesBars style={{ stroke: "white", fill: "#41c3f9", fillOpacity: ".25" }} />
                         <SparklinesLine style={{ stroke: "#41c3f9", fill: "none" }} />
                     </Sparklines>
-                
+                </div>
             </div>
         </section>
         </>

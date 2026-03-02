@@ -4,7 +4,6 @@ import cartoon from '../assets/yoyo.png'
 import '../App.css'
 import MyCalendarHeatmap from './heatmap/heatmap'
 import Statistik from './statistik/statistik'
-import useStorage from './habits/hooks/useLocalStorage'
 import { Sparklines, SparklinesBars, SparklinesLine } from 'react-sparklines';
 import useStreak from './streak/streak'
 

@@ -10,10 +10,8 @@ function useStreak() {
   (dateTime || []).forEach((time) => {
     if (time.count > 0) {
       tempStreak++;
-      // Update maxStreak jika tempStreak saat ini lebih besar
       if (tempStreak > maxStreak) maxStreak = tempStreak;
     } else {
-      // Reset hitungan sementara ke 0 karena ketemu count 0
       tempStreak = 0;
     }
   });
